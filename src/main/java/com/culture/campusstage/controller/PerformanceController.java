@@ -4,6 +4,7 @@ import com.culture.campusstage.entity.Performance;
 import com.culture.campusstage.service.PerformanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -13,8 +14,8 @@ import java.util.List;
 public class PerformanceController {
     private final PerformanceService performanceService;
 
-    @GetMapping("/performances")
-    public List<Performance> getPerformances() {
-        return performanceService.getList();
+    @GetMapping("/performances/category/{categoryId}")
+    public List<Performance> getByCategory(@PathVariable Long categoryId) {
+        return performanceService.getByCategory(categoryId);
     }
 }

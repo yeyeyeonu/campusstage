@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CampusStage</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+<div class="app">
+
+    <!-- 상단 -->
+    <header class="header">
+        <div>
+            <h1>향연</h1>
+            <p>순천향대학교 문화공연 플랫폼</p>
+        </div>
+        <div class="user-menu">
+            <span>회원가입</span>
+            <span>/</span>
+            <span>로그인</span>
+            <span>/</span>
+            <span>마이페이지</span>
+        </div>
+    </header>
+
+    <!-- 상단 카테고리: 페이지 이동용 -->
+    <nav class="top-category">
+        <button class="top-category-btn active" data-category-id="1">밴드동아리</button>
+        <button class="top-category-btn" data-category-id="2">공연영상학과</button>
+        <button class="top-category-btn" data-category-id="3">학생회</button>
+        <button class="top-category-btn" data-category-id="4">기타동아리</button>
+    </nav>
+
+    <!-- 대표 공연 -->
+    <section class="main-performance">
+        <div class="poster-box">
+            <img src="/images/sample-poster.jpg" alt="대표 공연 포스터" />
+        </div>
+
+        <div class="info-box">
+            <div class="info-card">날짜</div>
+            <div class="info-card">소속</div>
+        </div>
+    </section>
+
+    <!-- 메인 추천 탭 -->
+    <section class="recommend-section">
+        <div class="recommend-tabs">
+            <button class="active" data-category-id="1">밴드동아리</button>
+            <button data-category-id="2">공연영상학과</button>
+            <button data-category-id="3">학생회</button>
+            <button data-category-id="4">기타동아리</button>
+        </div>
+
+        <div id="recommendList" class="recommend-list">
+            <!-- JS로 추천 공연 카드 생성 -->
+        </div>
+    </section>
+
+</div>
+
+<script src="index.js"></script>
+</body>
+</html>
