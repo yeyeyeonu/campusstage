@@ -167,3 +167,15 @@ body {
     font-size: 14px;
     color: #777;
 }
+
+.user-menu-btn {
+    background: none;
+    border: none;
+    color: Black;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.user-menu-btn:hover {
+    opacity: 0.7;
+}

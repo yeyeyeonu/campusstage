@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+
+<div class="signup-container">
+
+    <div class="signup-top">
+        <button class="home-btn"
+                onclick="location.href='../index.html'">
+            〈
+        </button>
+
+        <span id="stepText">1 / 7</span>
+    </div>
+
+    <section class="step active" id="step1">
+        <h1>아이디를 입력해주세요</h1>
+        <input id="userid" placeholder="아이디">
+        <button onclick="saveUserid()">다음</button>
+    </section>
+
+    <section class="step" id="step2">
+        <h1>비밀번호를 입력해주세요</h1>
+        <input id="password" type="password" placeholder="비밀번호">
+        <button onclick="savePassword()">다음</button>
+        <button type="button" class="prev-btn" onclick="prevStep()">이전</button>
+    </section>
+
+    <section class="step" id="step3">
+        <h1>비밀번호를 한 번 더 입력해주세요</h1>
+        <input id="passwordConfirm" type="password" placeholder="비밀번호 확인">
+        <button onclick="checkPassword()">다음</button>
+        <button type="button" class="prev-btn" onclick="prevStep()">이전</button>
+    </section>
+
+    <section class="step" id="step4">
+        <h1>이름을 입력해주세요</h1>
+        <input id="name" placeholder="이름">
+        <button onclick="saveName()">다음</button>
+        <button type="button" class="prev-btn" onclick="prevStep()">이전</button>
+    </section>
+
+    <section class="step" id="step5">
+
+        <h1>소속 정보를 선택해주세요</h1>
+
+        <select id="collegeSelect"
+                onchange="updateMajorOptions()">
+        </select>
+
+        <select id="majorSelect"></select>
+
+        <button onclick="saveCollegeMajor()">다음</button>
+        <button type="button" class="prev-btn" onclick="prevStep()">이전</button>
+
+    </section>
+
+    <section class="step" id="step6">
+        <h1>이메일을 입력해주세요</h1>
+        <input id="email" type="email" placeholder="example@email.com">
+        <button onclick="saveEmail()">다음</button>
+        <button type="button" class="prev-btn" onclick="prevStep()">이전</button>
+    </section>
+
+    <section class="step" id="step7">
+        <h1>성별을 선택해주세요</h1>
+
+        <div class="gender-box">
+            <button onclick="selectGender('FEMALE')">여성</button>
+            <button onclick="selectGender('MALE')">남성</button>
+            <button type="button" class="prev-btn" onclick="prevStep()">이전</button>
+        </div>
+
+        <button class="submit-btn" onclick="signup()">회원가입 완료</button>
+    </section>
+
+</div>
+
+<script src="signup.js"></script>
+</body>
+</html>

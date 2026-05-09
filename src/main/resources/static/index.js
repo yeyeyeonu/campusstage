@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = "http://localhost:8081";
 
 const recommendList = document.getElementById("recommendList");
 
@@ -84,4 +84,42 @@ function renderRecommendList(performances) {
 
         recommendList.appendChild(card);
     });
+}
+
+function renderUserMenu() {
+
+    const userMenu = document.getElementById("userMenu");
+
+    const loginUser = localStorage.getItem("loginUser");
+
+    if (loginUser) {
+
+        userMenu.innerHTML = `
+            <span>${loginUser}님</span>
+            <span>/</span>
+            <a href="mypage.html">마이페이지</a>
+            <span>/</span>
+            <span id="logoutBtn">로그아웃</span>
+        `;
+
+        document.getElementById("logoutBtn")
+            .addEventListener("click", logout);
+
+    } else {
+
+        userMenu.innerHTML = `
+            <a href="signup/signup.html">회원가입</a>
+            <span>/</span>
+            <a href="login/login.html">로그인</a>
+        `;
+    }
+}
+
+function logout() {
+
+    localStorage.removeItem("loginUser");
+
+    alert("로그아웃 되었습니다.");
+
+    location.reload();
 }

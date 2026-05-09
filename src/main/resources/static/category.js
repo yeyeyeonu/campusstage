@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = "http://localhost:8081";
 
 const categoryTitle = document.getElementById("categoryTitle");
 const categorySubTitle = document.getElementById("categorySubTitle");
