@@ -9,33 +9,14 @@
 <body>
 <div class="app">
 
-    <!-- 상단 -->
     <header class="header">
         <div>
             <h1>SOON</h1>
             <p>순천향대학교 문화공연 플랫폼</p>
         </div>
-        <div class="user-menu">
 
-            <button class="user-menu-btn"
-                    onclick="location.href='/signup/signup.html'">
-                회원가입
-            </button>
-
-            <span>/</span>
-
-            <button class="user-menu-btn"
-                    onclick="location.href='/login/login.html'">
-                로그인
-            </button>
-
-            <span>/</span>
-
-            <button class="user-menu-btn"
-                    onclick="location.href='mypage.html'">
-                마이페이지
-            </button>
-
+        <div class="user-menu" id="userMenu">
+            <!-- JS에서 로그인 상태에 따라 메뉴 생성 -->
         </div>
     </header>
 
@@ -72,6 +53,8 @@
             <!-- JS로 추천 공연 카드 생성 -->
         </div>
     </section>
+
+
 
 </div>
 

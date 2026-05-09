@@ -2,28 +2,24 @@ const API_BASE_URL = "http://localhost:8081";
 
 const recommendList = document.getElementById("recommendList");
 
-// 페이지 처음 열리면 밴드동아리 추천부터 출력
 document.addEventListener("DOMContentLoaded", () => {
     loadRecommendByCategory(1);
     bindTopCategoryEvents();
     bindRecommendTabEvents();
+    renderUserMenu();
 });
 
-// 상단 카테고리: 카테고리별 목록 페이지로 이동
 function bindTopCategoryEvents() {
     const topButtons = document.querySelectorAll(".top-category button");
 
     topButtons.forEach(button => {
         button.addEventListener("click", () => {
             const categoryId = button.dataset.categoryId;
-
-            // 나중에 category.html 만들면 여기로 이동
             location.href = `/category.html?categoryId=${categoryId}`;
         });
     });
 }
 
-// 하단 추천 탭: 메인 화면 안에서 추천 공연만 변경
 function bindRecommendTabEvents() {
     const tabButtons = document.querySelectorAll(".recommend-tabs button");
 
@@ -38,7 +34,6 @@ function bindRecommendTabEvents() {
     });
 }
 
-// 카테고리별 공연 불러오기
 async function loadRecommendByCategory(categoryId) {
     try {
         const response = await fetch(`${API_BASE_URL}/performances/${categoryId}`);
@@ -56,7 +51,6 @@ async function loadRecommendByCategory(categoryId) {
     }
 }
 
-// 추천 공연 카드 출력
 function renderRecommendList(performances) {
     recommendList.innerHTML = "";
 
@@ -87,36 +81,58 @@ function renderRecommendList(performances) {
 }
 
 function renderUserMenu() {
-
     const userMenu = document.getElementById("userMenu");
-
     const loginUser = localStorage.getItem("loginUser");
+
 
     if (loginUser) {
 
         userMenu.innerHTML = `
-            <span>${loginUser}님</span>
-            <span>/</span>
-            <a href="mypage.html">마이페이지</a>
-            <span>/</span>
-            <span id="logoutBtn">로그아웃</span>
+            <div class="welcome-box">
+
+                <p class="welcome-text">
+                    ${loginUser}님 반갑습니다!
+                </p>
+
+                <div class="menu-links">
+
+                    <span id="logoutBtn"
+                          class="user-menu-btn">
+                        로그아웃
+                    </span>
+
+                    <span>/</span>
+
+                    <button class="user-menu-btn"
+                            onclick="location.href='mypage.html'">
+                        마이페이지
+                    </button>
+
+                </div>
+            </div>
         `;
 
         document.getElementById("logoutBtn")
             .addEventListener("click", logout);
 
     } else {
-
         userMenu.innerHTML = `
-            <a href="signup/signup.html">회원가입</a>
+            <button class="user-menu-btn" onclick="location.href='/signup/signup.html'">
+                회원가입
+            </button>
             <span>/</span>
-            <a href="login/login.html">로그인</a>
+            <button class="user-menu-btn" onclick="location.href='/login/login.html'">
+                로그인
+            </button>
+            <span>/</span>
+            <button class="user-menu-btn" onclick="location.href='mypage.html'">
+                마이페이지
+            </button>
         `;
     }
 }
 
 function logout() {
-
     localStorage.removeItem("loginUser");
 
     alert("로그아웃 되었습니다.");
