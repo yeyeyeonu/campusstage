@@ -1,7 +1,7 @@
 package com.culture.campusstage.service;
 
-import com.culture.campusstage.dto.LoginRequestDTO;
-import com.culture.campusstage.dto.SignupRequestDTO;
+import com.culture.campusstage.dto.LoginRequestDto;
+import com.culture.campusstage.dto.SignupRequestDto;
 import com.culture.campusstage.entity.User;
 import com.culture.campusstage.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public void signup(SignupRequestDTO request) {
+    public void signup(SignupRequestDto request) {
 
         if (userRepository.existsByUserid(request.getUserid())) {
             throw new RuntimeException("이미 존재하는 아이디입니다.");
@@ -34,7 +34,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public boolean login(LoginRequestDTO request) {
+    public boolean login(LoginRequestDto request) {
 
         User user = userRepository.findByUserid(request.getUserid())
                 .orElse(null);

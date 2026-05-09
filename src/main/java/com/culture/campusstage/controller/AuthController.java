@@ -1,7 +1,7 @@
 package com.culture.campusstage.controller;
 
-import com.culture.campusstage.dto.LoginRequestDTO;
-import com.culture.campusstage.dto.SignupRequestDTO;
+import com.culture.campusstage.dto.LoginRequestDto;
+import com.culture.campusstage.dto.SignupRequestDto;
 import com.culture.campusstage.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +26,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public String signup(@RequestBody SignupRequestDTO request) {
+    public String signup(@RequestBody SignupRequestDto request) {
 
         userService.signup(request);
 
@@ -34,7 +34,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequestDTO request) {
+    public String login(@RequestBody LoginRequestDto request) {
 
         boolean success = userService.login(request);
 
