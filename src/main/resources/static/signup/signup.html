@@ -13,7 +13,7 @@
     <div class="signup-top">
         <button class="home-btn"
                 onclick="location.href='../index.html'">
-            〈
+            〈 메인화면
         </button>
 
         <span id="stepText">1 / 7</span>
@@ -21,8 +21,18 @@
 
     <section class="step active" id="step1">
         <h1>아이디를 입력해주세요</h1>
+
         <input id="userid" placeholder="아이디">
-        <button onclick="saveUserid()">다음</button>
+
+        <button type="button" id="checkUseridBtn" class="sub-btn">
+            중복확인
+        </button>
+
+        <p id="useridCheckMessage"></p>
+
+        <button onclick="saveUserid()" class="main-btn">
+            다음
+        </button>
     </section>
 
     <section class="step" id="step2">
@@ -46,9 +56,36 @@
         <button type="button" class="prev-btn" onclick="prevStep()">이전</button>
     </section>
 
-    <section class="step" id="step5">
+    <section class="step active" id="step5">
+        <h1>사용하실 별명을 입력해주세요</h1>
+        <input id="nickname" placeholder="별명">
+        <button type="button" id="checkNicknameBtn" class="sub-btn">
+            중복확인
+        </button>
+        <p id="nicknameCheckMessage"></p>
+        <button onclick="saveNickname()" class="main-btn">
+            다음
+        </button>
+    </section>
 
-        <h1>소속 정보를 선택해주세요</h1>
+
+    <section class="step" id="step6">
+        <h1>소속 유형을 선택해주세요</h1>
+        <select id="userTypeSelect">
+            <option value="">선택해주세요</option>
+            <option value="UNDERGRAD">학부생</option>
+            <option value="GRADUATE">대학원생</option>
+            <option value="STAFF">교직원</option>
+            <option value="OTHER">기타</option>
+        </select>
+
+        <button onclick="saveUserType()">다음</button>
+        <button type="button" class="prev-btn" onclick="prevStep()">이전</button>
+    </section>
+
+    <section class="step" id="step7">
+
+        <h1>단과대와 학과, 학번을 선택해주세요</h1>
 
         <select id="collegeSelect"
                 onchange="updateMajorOptions()">
@@ -56,19 +93,43 @@
 
         <select id="majorSelect"></select>
 
+        <select id="studentYear">
+            <option value="">학번 선택</option>
+            <option value="26">26학번</option>
+            <option value="25">25학번</option>
+            <option value="24">24학번</option>
+            <option value="23">23학번</option>
+            <option value="22">22학번</option>
+            <option value="21">21학번</option>
+            <option value="20">20학번</option>
+            <option value="19">19학번</option>
+            <option value="18">18학번</option>
+            <option value="17">17학번</option>
+            <option value="16">16학번</option>
+            <option value="15">15학번</option>
+            <option value="14">14학번</option>
+            <option value="13">13학번</option>
+            <option value="12">12학번</option>
+        </select>
+
         <button onclick="saveCollegeMajor()">다음</button>
-        <button type="button" class="prev-btn" onclick="prevStep()">이전</button>
+
+        <button type="button"
+                class="prev-btn"
+                onclick="prevStep()">
+            이전
+        </button>
 
     </section>
 
-    <section class="step" id="step6">
+    <section class="step" id="step8">
         <h1>이메일을 입력해주세요</h1>
         <input id="email" type="email" placeholder="example@email.com">
         <button onclick="saveEmail()">다음</button>
         <button type="button" class="prev-btn" onclick="prevStep()">이전</button>
     </section>
 
-    <section class="step" id="step7">
+    <section class="step" id="step9">
         <h1>성별을 선택해주세요</h1>
 
         <div class="gender-box">

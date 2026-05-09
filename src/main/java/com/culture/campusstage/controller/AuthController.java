@@ -5,6 +5,12 @@ import com.culture.campusstage.dto.SignupRequestDTO;
 import com.culture.campusstage.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
+import java.util.Map;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -37,5 +43,20 @@ public class AuthController {
         }
 
         return "아이디 또는 비밀번호가 틀렸습니다.";
+
     }
+
+    @GetMapping("/check-userid")
+    public Map<String, Boolean> checkUserid(@RequestParam String userid) {
+        boolean available = userService.checkUseridAvailable(userid);
+        return Map.of("available", available);
+    }
+
+    @GetMapping("/check-nickname")
+    public Map<String, Boolean> checkNickname(@RequestParam String nickname) {
+
+        boolean available = userService.checkNicknameAvailable(nickname);
+        return Map.of("available", available);
+    }
+
 }

@@ -26,6 +26,10 @@ public class UserService {
         user.setPassword(request.getPassword());
         user.setEmail(request.getEmail());
         user.setNickname(request.getNickname());
+        user.setCollege(request.getCollege());
+        user.setMajor(request.getMajor());
+        user.setStudentYear(request.getStudentYear());
+        user.setUserType(request.getUserType());
 
         userRepository.save(user);
     }
@@ -40,5 +44,13 @@ public class UserService {
         }
 
         return user.getPassword().equals(request.getPassword());
+    }
+
+    public boolean checkUseridAvailable(String userid) {
+        return !userRepository.existsByUserid(userid);
+    }
+
+    public boolean checkNicknameAvailable(String nickname) {
+        return !userRepository.existsByNickname(nickname);
     }
 }

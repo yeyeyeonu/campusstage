@@ -1,7 +1,7 @@
 const API_BASE_URL = "http://localhost:8081";
 
 let currentStep = 1;
-const totalStep = 7;
+const totalStep = 9;
 
 const collegeData = {
 
@@ -92,15 +92,20 @@ const collegeData = {
     ]
 };
 
+const studentYear =
+    document.getElementById("studentYear").value;
+
 let signupData = {
     userid: "",
     password: "",
     name: "",
+    nickname: "",
     college: "",
     major: "",
+    studentYear: "",
+    userType: "",
     email: "",
-    gender: "",
-    nickname: ""
+    gender: ""
 };
 
 function showStep(step) {
@@ -135,6 +140,11 @@ function restoreInputValues() {
             signupData.name;
     }
 
+    if (document.getElementById("nickname")) {
+        document.getElementById("nickname").value =
+            signupData.nickname;
+    }
+
     if (document.getElementById("email")) {
         document.getElementById("email").value =
             signupData.email;
@@ -157,7 +167,12 @@ function prevStep() {
     }
 }
 
+let isUseridChecked = false;
+let checkedUserid = "";
+
+// 아이디 입력
 function saveUserid() {
+
     const userid = document.getElementById("userid").value.trim();
 
     if (!userid) {
@@ -165,10 +180,24 @@ function saveUserid() {
         return;
     }
 
+    // 중복확인 안 했을 경우
+    if (!isUseridChecked) {
+        alert("아이디 중복확인을 해주세요.");
+        return;
+    }
+
+    // 중복확인 후 아이디를 다시 바꾼 경우
+    if (checkedUserid !== userid) {
+        alert("아이디를 다시 중복확인해주세요.");
+        return;
+    }
+
     signupData.userid = userid;
+
     nextStep();
 }
 
+//비밀번호 입력
 function savePassword() {
     const password = document.getElementById("password").value.trim();
 
@@ -177,8 +206,8 @@ function savePassword() {
         return;
     }
 
-    if (password.length < 4) {
-        alert("비밀번호는 4자 이상 입력해주세요.");
+    if (password.length < 6) {
+        alert("비밀번호는 6자 이상 입력해주세요.");
         return;
     }
 
@@ -186,6 +215,7 @@ function savePassword() {
     nextStep();
 }
 
+// 비밀번호 확인
 function checkPassword() {
     const passwordConfirm = document.getElementById("passwordConfirm").value.trim();
 
@@ -197,6 +227,7 @@ function checkPassword() {
     nextStep();
 }
 
+// 이름 입력
 function saveName() {
     const name = document.getElementById("name").value.trim();
 
@@ -211,6 +242,30 @@ function saveName() {
     nextStep();
 }
 
+// 닉네임 입력
+function saveNickname() {
+
+    const nickname = document.getElementById("nickname").value.trim();
+
+    if (!nickname) {
+        alert("별명을 입력해주세요.");
+        return;
+    }
+
+    if (!isNicknameChecked) {
+        alert("별명 중복확인을 해주세요.");
+        return;
+    }
+
+    if (checkedNickname !== nickname) {
+        alert("별명을 다시 중복확인해주세요.");
+        return;
+    }
+
+    signupData.nickname = nickname;
+
+    nextStep();
+}
 function saveCollegeMajor() {
 
     const college =
@@ -219,6 +274,9 @@ function saveCollegeMajor() {
     const major =
         document.getElementById("majorSelect").value;
 
+    const studentYear =
+        document.getElementById("studentYear").value;
+
     if (!college || !major) {
 
         alert("단과대와 학과를 선택해주세요.");
@@ -226,8 +284,16 @@ function saveCollegeMajor() {
         return;
     }
 
+    if (!studentYear) {
+
+        alert("입학년도를 선택해주세요.");
+
+        return;
+    }
+
     signupData.college = college;
     signupData.major = major;
+    signupData.studentYear = studentYear;
 
     nextStep();
 }
@@ -325,17 +391,96 @@ function updateMajorOptions() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-
     showStep(currentStep);
-
     loadCollegeOptions();
 
+    const useridInput = document.getElementById("userid");
+    const checkUseridBtn = document.getElementById("checkUseridBtn");
+    const useridCheckMessage = document.getElementById("useridCheckMessage");
+
+    useridInput.addEventListener("input", () => {
+        isUseridChecked = false;
+        checkedUserid = "";
+        useridCheckMessage.textContent = "";
+    });
+
+    checkUseridBtn.addEventListener("click", async () => {
+        const userid = useridInput.value.trim();
+
+        if (!userid) {
+            alert("아이디를 입력해주세요.");
+            return;
+        }
+
+        const response = await fetch(
+            `${API_BASE_URL}/auth/check-userid?userid=${encodeURIComponent(userid)}`
+        );
+
+        const result = await response.json();
+
+        if (result.available === true) {
+            isUseridChecked = true;
+            checkedUserid = userid;
+            useridCheckMessage.textContent = "사용 가능한 아이디입니다.";
+        } else {
+            isUseridChecked = false;
+            checkedUserid = "";
+            useridCheckMessage.textContent = "이미 존재하는 아이디입니다.";
+        }
+    });
+
+    const nicknameInput = document.getElementById("nickname");
+    const checkNicknameBtn = document.getElementById("checkNicknameBtn");
+    const nicknameCheckMessage = document.getElementById("nicknameCheckMessage");
+
+    nicknameInput.addEventListener("input", () => {
+        isNicknameChecked = false;
+        checkedNickname = "";
+        nicknameCheckMessage.textContent = "";
+    });
+
+    checkNicknameBtn.addEventListener("click", async () => {
+        const nickname = nicknameInput.value.trim();
+
+        if (!nickname) {
+            alert("별명을 입력해주세요.");
+            return;
+        }
+
+        const response = await fetch(
+            `${API_BASE_URL}/auth/check-nickname?nickname=${encodeURIComponent(nickname)}`
+        );
+
+        const result = await response.json();
+
+        if (result.available === true) {
+            isNicknameChecked = true;
+            checkedNickname = nickname;
+            nicknameCheckMessage.textContent = "사용 가능한 별명입니다.";
+        } else {
+            isNicknameChecked = false;
+            checkedNickname = "";
+            nicknameCheckMessage.textContent = "이미 존재하는 별명입니다.";
+        }
+    });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
+function saveUserType() {
+    const userType = document.getElementById("userTypeSelect").value;
 
-    showStep(currentStep);
+    if (!userType) {
+        alert("소속 유형을 선택해주세요.");
+        return;
+    }
 
-    loadCollegeOptions();
+    signupData.userType = userType;
 
-});
+    if (userType === "UNDERGRAD") {
+        nextStep(); // 단과대/학과 선택으로 이동
+    } else {
+        signupData.college = "";
+        signupData.major = "";
+        currentStep += 2; // 단과대/학과 단계 건너뛰기
+        showStep(currentStep);
+    }
+}

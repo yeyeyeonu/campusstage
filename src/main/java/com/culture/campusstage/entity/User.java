@@ -22,7 +22,12 @@ public class User {
     private String email;
     private String college;
     private String major;
-    private String studentId;
+
+    @Column(name = "student_year")
+    private String studentYear;
+
+    @Column(name = "user_type")
+    private String userType;
     private String nickname;
     private LocalDateTime createdAt;
 
