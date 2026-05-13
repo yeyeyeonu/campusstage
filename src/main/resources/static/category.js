@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:8081";
+const API_BASE_URL = "http://localhost:9090";
 
 const categoryTitle = document.getElementById("categoryTitle");
 const categorySubTitle = document.getElementById("categorySubTitle");
@@ -65,7 +65,7 @@ function renderPerformances(performances) {
         card.className = "performance-card";
 
         card.addEventListener("click", () => {
-            location.href = `/detail.html?id=${performance.id}`;
+            location.href = `detail/detail.html?id=${performance.id}`;
         });
 
         card.innerHTML = `

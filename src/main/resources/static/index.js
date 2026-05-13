@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:8081";
+const API_BASE_URL = "http://localhost:9090";
 
 const recommendList = document.getElementById("recommendList");
 
@@ -88,28 +88,29 @@ function renderUserMenu() {
     if (loginUser) {
 
         userMenu.innerHTML = `
-            <div class="welcome-box">
+        <div class="welcome-box">
 
-                <p class="welcome-text">
-                    ${loginUser}님 반갑습니다!
-                </p>
+            <p class="welcome-text">
+                ${loginUser}님 반갑습니다!
+            </p>
 
-                <div class="menu-links">
+            <div class="menu-links">
 
-                    <span id="logoutBtn"
-                          class="user-menu-btn">
-                        로그아웃
-                    </span>
+                <span id="logoutBtn"
+                      class="user-menu-btn">
+                    로그아웃
+                </span>
 
-                    <span>/</span>
+                <span>/</span>
 
-                    <button class="user-menu-btn"
-                            onclick="location.href='mypage.html'">
-                        마이페이지
-                    </button>
+                <button class="user-menu-btn"
+                        onclick="location.href='/pages/mypage.html'">
+                    마이페이지
+                </button>
 
-                </div>
             </div>
+
+        </div>
         `;
 
         document.getElementById("logoutBtn")
@@ -124,10 +125,9 @@ function renderUserMenu() {
             <button class="user-menu-btn" onclick="location.href='/login/login.html'">
                 로그인
             </button>
-            <span>/</span>
-            <button class="user-menu-btn" onclick="location.href='mypage.html'">
-                마이페이지
-            </button>
+<!--            <button class="user-menu-btn" onclick="location.href='/mypage.html'">-->
+<!--                마이페이지-->
+<!--            </button>-->
         `;
     }
 }

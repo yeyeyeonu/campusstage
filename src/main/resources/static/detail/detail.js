@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:8081";
+const API_BASE_URL = "http://localhost:9090";
 
 const detailContainer = document.getElementById("detailContainer");
 
@@ -60,8 +60,11 @@ function renderDetail(performance) {
             <p>${performance.detailInfo || '상세 정보가 없습니다.'}</p>
         </section>
 
-        <button class="reserve-btn">예매하기</button>
+        <button id="favoriteBtn">찜하기</button>
+        <button class="reserve-btn">봤던 공연</button>
     `;
+
+    document.getElementById("favoriteBtn").addEventListener("click", addFavorite);
 }
 
 function formatDate(dateString) {
@@ -78,3 +81,43 @@ function formatDate(dateString) {
         minute: "2-digit"
     });
 }
+
+async function addFavorite() {
+    const userId = localStorage.getItem("userId");
+    const performanceId = getPerformanceIdFromUrl();
+
+    console.log("userId:", userId);
+    console.log("performanceId:", performanceId);
+
+    if (!userId) {
+        alert("로그인이 필요합니다.");
+        return;
+    }
+
+
+    const response = await fetch(
+        `${API_BASE_URL}/favorites?userId=${userId}&performanceId=${performanceId}`,
+        {
+            method: "POST"
+        }
+    );
+
+    if (response.ok) {
+        const user = await response.json();
+
+        console.log("로그인 응답:", user);
+
+        localStorage.setItem("loginUser", user.userid);
+        localStorage.setItem("userId", user.id);
+
+        location.href = "/index.html";
+    }
+
+    if (!response.ok) {
+        alert("찜하기 실패");
+        return;
+    }
+
+    alert("찜 완료!");
+}
+

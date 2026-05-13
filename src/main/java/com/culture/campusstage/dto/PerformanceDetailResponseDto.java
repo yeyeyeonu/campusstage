@@ -18,6 +18,7 @@ public class PerformanceDetailResponseDto {
     private String status;
     private String detailInfo;
 
+    // 테이블이 두개로 나눠져 있기 때문에 하나의 Dto로 묶어서 보여주기 위함
     public PerformanceDetailResponseDto(Performance performance, PerformanceDetail detail) {
         this.id = performance.getId();
         this.name = performance.getName();

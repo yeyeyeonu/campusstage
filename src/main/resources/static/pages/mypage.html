@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>마이페이지</title>
+    <link rel="stylesheet" href="mypage.css" />
+</head>
+<body>
+<div class="mypage-container">
+    <h1>마이페이지</h1>
+
+    <section class="profile-card">
+        <h2>프로필</h2>
+        <p><strong>이름</strong> <span id="name"></span></p>
+        <p><strong>아이디</strong> <span id="userid"></span></p>
+        <p><strong>전공</strong> <span id="major"></span></p>
+        <p><strong>닉네임</strong> <span id="nickname"></span></p>
+    </section>
+
+    <section>
+        <h2>찜한 공연</h2>
+        <div id="favorites" class="card-list"></div>
+    </section>
+
+    <section>
+        <h2>관람 기록</h2>
+        <div id="watchHistory" class="card-list"></div>
+    </section>
+
+    <section>
+        <h2>내가 남긴 댓글</h2>
+        <div id="reviews" class="card-list"></div>
+    </section>
+</div>
+
+<script src="mypage.js"></script>
+</body>
+</html>
